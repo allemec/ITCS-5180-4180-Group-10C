@@ -18,6 +18,7 @@ public class MainActivity extends Activity {
 	public static final int VIEW_TASK_CODE = 200;
 	public static final int EDIT_TASK_CODE = 300;
 	public static final int DELETE_TASK_CODE = 400;
+	final static String CREATETASK = "CREATETASK";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,12 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+		if(requestCode == CREATE_TASK_CODE){
+			if(resultCode == RESULT_OK){
+				TaskList tk = (TaskList) getIntent().getExtras().getParcelable(MainActivity.CREATETASK);
+				ls.add(tk);
+			}
+		}
 	}
 
 }
