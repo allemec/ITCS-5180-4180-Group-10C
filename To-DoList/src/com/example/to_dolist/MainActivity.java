@@ -27,6 +27,8 @@ public class MainActivity extends Activity {
 	public static final int EDIT_TASK_CODE = 3000;
 	public static final int DELETE_TASK_CODE = 4000;
 	public static final String CREATETASK = "CREATETASK";
+	public static final String TASKCLICK = "TASKCLICK";
+	public static final String TASK_ID = "TASK_ID";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +55,12 @@ public class MainActivity extends Activity {
 	private void displayData() {
 		int id_tracker = 0;
 		int tag_tracker = 0;
+		ImageButton ib = new ImageButton(this);
 		// TODO Auto-generated method stub
 		LinearLayout LLmain = new LinearLayout(this);
-		for (int i = 0; i < ls.size(); i++)
+		for (int i = 0; i < ls.size(); i++) {
+			TaskList tk = (TaskList) ls.get(i);
 			if (i == 0) {
-				TaskList tk = (TaskList) ls.get(i);
 
 				RelativeLayout Rl = new RelativeLayout(this);
 				RelativeLayout.LayoutParams Rlparams = new RelativeLayout.LayoutParams(
@@ -78,7 +81,6 @@ public class MainActivity extends Activity {
 				tv.setText(ls.size() + "Tasks");
 				Rl.addView(tv);
 
-				ImageButton ib = new ImageButton(this);
 				RelativeLayout.LayoutParams Rlparams2 = new RelativeLayout.LayoutParams(
 						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 				Rlparams2.addRule(Rl.ALIGN_PARENT_RIGHT);
@@ -88,7 +90,8 @@ public class MainActivity extends Activity {
 						LayoutParams.MATCH_PARENT);
 				ib.setImageResource(R.drawable.ic_action_new);
 				ib.setLayoutParams(Rlparams2);
-				ib.setId(2);
+				ib.setId(id_tracker);
+				id_tracker++;
 				Rl.addView(ib);
 
 				ScrollView sv = new ScrollView(this);
@@ -107,6 +110,7 @@ public class MainActivity extends Activity {
 				LLmain.setLayoutParams(params);
 				sv.addView(LLmain);
 
+			} else {
 				LinearLayout LL1 = new LinearLayout(this);
 				LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(
 						300, 70);
@@ -116,13 +120,27 @@ public class MainActivity extends Activity {
 				LL1.setTag(tag_tracker);
 				tag_tracker++;
 				LLmain.addView(LL1);
+				final int click_location = tag_tracker - 1;
+				LL1.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+
+						TaskList tk_onclick = (TaskList) ls.get(click_location);
+						Intent I = new Intent();
+						I.putExtra(MainActivity.TASKCLICK, tk_onclick);
+						I.putExtra(MainActivity.TASK_ID, click_location);
+						startActivityForResult(I,MainActivity.VIEW_TASK_CODE);
+
+					}
+				});
 
 				TextView tv_title = new TextView(this);
 				RelativeLayout.LayoutParams ll2 = new RelativeLayout.LayoutParams(
 						LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 				ll2.setMargins(15, LayoutParams.MATCH_PARENT,
 						LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-				ll2.addRule(RelativeLayout.BELOW, ib.getId());
+				ll2.addRule(RelativeLayout.BELOW, id_tracker - 1);
 				tv_title.setTextAppearance(this,
 						android.R.style.TextAppearance_Medium);
 				LL1.addView(tv_title);
@@ -133,39 +151,32 @@ public class MainActivity extends Activity {
 				TextView tv_date = new TextView(this);
 				RelativeLayout.LayoutParams ll3 = new RelativeLayout.LayoutParams(
 						LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+				ll3.addRule(RelativeLayout.BELOW, id_tracker - 1);
+				ll3.setMargins(15, LayoutParams.MATCH_PARENT,
+						LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+				tv_title.setTextAppearance(this,
+						android.R.style.TextAppearance_Small);
+				tv_title.setId(id_tracker);
+				id_tracker++;
+				tv_date.setText(tk.dt);
+				LL1.addView(tv_date);
 
-			} else {
-
-				/*
-				 * RelativeLayout.LayoutParams Rlparams1 = new
-				 * RelativeLayout.LayoutParams( 300, 30);
-				 * Rlparams1.addRule(Rl.ALIGN_PARENT_LEFT);
-				 * Rlparams1.addRule(Rl.ALIGN_PARENT_TOP);
-				 * Rlparams1.setMargins(15, 0, 0, 0);
-				 * tv.setLayoutParams(Rlparams1); tv.setId(1);
-				 * tv.setTextAppearance(this,
-				 * android.R.style.TextAppearance_Large); tv.setText(ls.size() +
-				 * "Tasks"); Rl.addView(tv);
-				 */
+				TextView tv_time = new TextView(this);
+				RelativeLayout.LayoutParams ll4 = new RelativeLayout.LayoutParams(
+						LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+				ll4.addRule(RelativeLayout.BELOW, id_tracker - 1);
+				ll4.setMargins(15, LayoutParams.MATCH_PARENT,
+						LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+				tv_time.setTextAppearance(this,
+						android.R.style.TextAppearance_Small);
+				tv_title.setId(id_tracker);
+				id_tracker++;
+				tv_date.setText(tk.dt);
+				LL1.addView(tv_time);
 
 			}
+		}
 
-		/*
-		 * <ScrollView android:id="@+id/scrollView1"
-		 * android:layout_width="wrap_content"
-		 * android:layout_height="match_parent"
-		 * android:layout_alignEnd="@+id/imageButton1"
-		 * android:layout_alignParentLeft="true"
-		 * android:layout_alignRight="@+id/imageButton1"
-		 * android:layout_below="@+id/imageButton1" >
-		 * 
-		 * <LinearLayout android:layout_width="296dp"
-		 * android:layout_height="match_parent" android:orientation="vertical" >
-		 * 
-		 * <LinearLayout android:layout_width="300dp"
-		 * android:layout_height="70dp" android:layout_marginTop="10dp"
-		 * android:orientation="vertical" >
-		 */
 	}
 
 	@Override
@@ -180,8 +191,8 @@ public class MainActivity extends Activity {
 
 				tk = (TaskList) data.getExtras().getParcelable(
 						MainActivity.CREATETASK);
-				Log.d("Back2Main_3",tk.task_name+"  "+tk.dt+" "+tk.tm +" "+
-						"Success !! ");
+				Log.d("Back2Main_3", tk.task_name + "  " + tk.dt + " " + tk.tm
+						+ " " + "Success !! ");
 				ls.add(tk);
 				// displayData();
 

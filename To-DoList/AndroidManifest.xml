@@ -26,6 +26,10 @@
             android:name=".CreateTask"
             android:label="@string/title_activity_create_task" >
         </activity>
+        <activity
+            android:name=".DisplayActivity"
+            android:label="@string/title_activity_display" >
+        </activity>
     </application>
 
 </manifest>

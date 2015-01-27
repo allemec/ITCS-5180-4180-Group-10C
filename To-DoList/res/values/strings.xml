@@ -10,5 +10,6 @@
     <string name="Medium">Medium</string>
     <string name="Low">Low</string>
     <string name="Save">Save</string>
+    <string name="title_activity_display">DisplayActivity</string>
 
 </resources>
