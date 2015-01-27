@@ -37,84 +37,91 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.activity_main);
-		 displayData();
-
-		findViewById(R.id.imageButton1).setOnClickListener(
-				new View.OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-
-						Intent I = new Intent(MainActivity.this,
-								CreateTask.class);
-
-						startActivityForResult(I, CREATE_TASK_CODE);
-
-					}
-				});
+		// setContentView(R.layout.activity_main);
+		Log.d("1", "Success");
+		displayData();
 
 	}
 
 	private void displayData() {
+		Log.d("2", "Success");
 		int id_tracker = 0;
 		int tag_tracker = 0;
 		ImageButton ib = new ImageButton(this);
 		// TODO Auto-generated method stub
 		LinearLayout LLmain = new LinearLayout(this);
+		
+			RelativeLayout Rl = new RelativeLayout(this);
+			RelativeLayout.LayoutParams Rlparams = new RelativeLayout.LayoutParams(
+					LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+			Rl.setLayoutParams(Rlparams);
+			setContentView(Rl);
+
+			TextView tv = new TextView(this);
+			RelativeLayout.LayoutParams Rlparams1 = new RelativeLayout.LayoutParams(
+					300, 30);
+			Rlparams1.addRule(Rl.ALIGN_PARENT_LEFT);
+			Rlparams1.addRule(Rl.ALIGN_PARENT_TOP);
+			Rlparams1.setMargins(15, LayoutParams.MATCH_PARENT,
+					LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+			tv.setLayoutParams(Rlparams1);
+			tv.setId(1);
+			tv.setTextAppearance(this, android.R.style.TextAppearance_Large);
+			tv.setText(ls.size() + "Tasks");
+			Rl.addView(tv);
+
+			RelativeLayout.LayoutParams Rlparams2 = new RelativeLayout.LayoutParams(
+					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			Rlparams2.addRule(Rl.ALIGN_PARENT_RIGHT);
+			Rlparams2.addRule(Rl.ALIGN_PARENT_TOP);
+			Rlparams2.setMargins(LayoutParams.MATCH_PARENT,
+					LayoutParams.MATCH_PARENT, 10,
+					LayoutParams.MATCH_PARENT);
+			ib.setImageResource(R.drawable.ic_action_new);
+			ib.setLayoutParams(Rlparams2);
+			ib.setId(id_tracker);
+			id_tracker++;
+			Rl.addView(ib);
+			findViewById(ib.getId()).setOnClickListener(
+					new View.OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+
+							Intent I = new Intent(MainActivity.this,
+									CreateTask.class);
+
+							startActivityForResult(I, CREATE_TASK_CODE);
+
+						}
+					});
+
+			ScrollView sv = new ScrollView(this);
+			RelativeLayout.LayoutParams Rlparams3 = new RelativeLayout.LayoutParams(
+					LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+			Rlparams3.addRule(Rl.ALIGN_END, ib.getId());
+			Rlparams3.addRule(Rl.ALIGN_RIGHT, ib.getId());
+			Rlparams3.addRule(Rl.BELOW, ib.getId());
+			Rlparams3.addRule(Rl.ALIGN_PARENT_LEFT);
+			sv.setLayoutParams(Rlparams3);
+			Rl.addView(sv);
+
+			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+					296, LayoutParams.WRAP_CONTENT);
+			LLmain.setOrientation(LinearLayout.VERTICAL);
+			LLmain.setLayoutParams(params);
+			sv.addView(LLmain);
+
+		
+			
+			/******************************/
+		
+			
+		
 		for (int i = 0; i < ls.size(); i++) {
+			Log.d("3", ls.size() + "Success");
 			TaskList tk = (TaskList) ls.get(i);
-			if (i == 0) {
-
-				RelativeLayout Rl = new RelativeLayout(this);
-				RelativeLayout.LayoutParams Rlparams = new RelativeLayout.LayoutParams(
-						LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-				Rl.setLayoutParams(Rlparams);
-				setContentView(Rl);
-
-				TextView tv = new TextView(this);
-				RelativeLayout.LayoutParams Rlparams1 = new RelativeLayout.LayoutParams(
-						300, 30);
-				Rlparams1.addRule(Rl.ALIGN_PARENT_LEFT);
-				Rlparams1.addRule(Rl.ALIGN_PARENT_TOP);
-				Rlparams1.setMargins(15, LayoutParams.MATCH_PARENT,
-						LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-				tv.setLayoutParams(Rlparams1);
-				tv.setId(1);
-				tv.setTextAppearance(this, android.R.style.TextAppearance_Large);
-				tv.setText(ls.size() + "Tasks");
-				Rl.addView(tv);
-
-				RelativeLayout.LayoutParams Rlparams2 = new RelativeLayout.LayoutParams(
-						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-				Rlparams2.addRule(Rl.ALIGN_PARENT_RIGHT);
-				Rlparams2.addRule(Rl.ALIGN_PARENT_TOP);
-				Rlparams2.setMargins(LayoutParams.MATCH_PARENT,
-						LayoutParams.MATCH_PARENT, 10,
-						LayoutParams.MATCH_PARENT);
-				ib.setImageResource(R.drawable.ic_action_new);
-				ib.setLayoutParams(Rlparams2);
-				ib.setId(id_tracker);
-				id_tracker++;
-				Rl.addView(ib);
-
-				ScrollView sv = new ScrollView(this);
-				RelativeLayout.LayoutParams Rlparams3 = new RelativeLayout.LayoutParams(
-						LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
-				Rlparams3.addRule(Rl.ALIGN_END, ib.getId());
-				Rlparams3.addRule(Rl.ALIGN_RIGHT, ib.getId());
-				Rlparams3.addRule(Rl.BELOW, ib.getId());
-				Rlparams3.addRule(Rl.ALIGN_PARENT_LEFT);
-				sv.setLayoutParams(Rlparams3);
-				Rl.addView(sv);
-
-				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-						296, LayoutParams.WRAP_CONTENT);
-				LLmain.setOrientation(LinearLayout.VERTICAL);
-				LLmain.setLayoutParams(params);
-				sv.addView(LLmain);
-
-			} else {
+			
 				LinearLayout LL1 = new LinearLayout(this);
 				LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(
 						300, 70);
@@ -179,7 +186,7 @@ public class MainActivity extends Activity {
 				tv_date.setText(tk.dt);
 				LL1.addView(tv_time);
 
-			}
+			
 		}
 
 	}
@@ -187,7 +194,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		TaskList tk = new TaskList("", "", "", "");
-		Log.d("Back2Main", "Test ");
+		Log.d("Req Code",requestCode + " Request Code");
 
 		if (requestCode == CREATE_TASK_CODE) {
 			Log.d("Back2Main_1", requestCode + " ");
@@ -199,40 +206,41 @@ public class MainActivity extends Activity {
 				Log.d("Back2Main_3", tk.task_name + "  " + tk.dt + " " + tk.tm
 						+ " " + "Success !! ");
 				ls.add(tk);
-				// displayData();
+				Log.d("Task Added",ls.size()+" is soze of linkedList");
+				
+				displayData();
 
 			}
 		} else if (requestCode == VIEW_TASK_CODE) {
 			if (resultCode == RESULT_OK) {
 				String function = data.getExtras().getString(FUNCTION);
 				int i = data.getExtras().getInt(TASK_ID);
-				if (function == MainActivity.DELETE) {
+				Log.d("function & position", function +" "+MainActivity.DELETE+ " function " + i + " Position");
+				if (function.equals(MainActivity.DELETE)) {
+					Log.d("Delete Task",i + "Position");
 					ls.remove(i);
+					
 					displayData();
-				} else if (function == MainActivity.EDIT){
-					tk=(TaskList) ls.get(i);
-					Intent In = new Intent(MainActivity.this,
-							EditTask.class);
+				} else if (function.equals(MainActivity.EDIT)){
+					tk = (TaskList) ls.get(i);
+					Intent In = new Intent(MainActivity.this, EditTask.class);
 					In.putExtra(MainActivity.EDIT, tk);
 					In.putExtra(MainActivity.TASK_ID, i);
 					startActivityForResult(In, MainActivity.EDIT_TASK_CODE);
 				}
 			}
-		} else if(requestCode == EDIT_TASK_CODE){
-			if(resultCode == RESULT_OK){
+		} else if (requestCode == EDIT_TASK_CODE) {
+			if (resultCode == RESULT_OK) {
 				int i = data.getExtras().getInt(TASK_ID);
 				TaskList new_tk = data.getExtras().getParcelable(EDIT_TASK);
-				
+
 				ls.remove(i);
-				ls.add(i,new_tk);
-				Intent I = new Intent(MainActivity.this,
-						DisplayActivity.class);
+				ls.add(i, new_tk);
+				Intent I = new Intent(MainActivity.this, DisplayActivity.class);
 				I.putExtra(MainActivity.TASKCLICK, new_tk);
 				I.putExtra(MainActivity.TASK_ID, i);
 				startActivityForResult(I, MainActivity.VIEW_TASK_CODE);
-				
-				
-				
+
 			}
 		}
 	}

@@ -32,7 +32,7 @@ public class DisplayActivity extends Activity {
 		tv3.setText(tk.tm);
 		TextView tv4 = (TextView) findViewById(R.id.textView9);
 		tv4.setText(tk.Priority);
-		ImageView del = (ImageView) findViewById(R.id.imageView1);
+		ImageView del = (ImageView) findViewById(R.id.imageView2);
 		del.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -47,7 +47,7 @@ public class DisplayActivity extends Activity {
 		
 		
 		
-		ImageView edit = (ImageView) findViewById(R.id.imageView2);
+		ImageView edit = (ImageView) findViewById(R.id.imageView1);
 		edit.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
