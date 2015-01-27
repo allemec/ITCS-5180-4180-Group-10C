@@ -30,6 +30,10 @@
             android:name=".DisplayActivity"
             android:label="@string/title_activity_display" >
         </activity>
+        <activity
+            android:name=".EditTask"
+            android:label="@string/title_activity_edit_task" >
+        </activity>
     </application>
 
 </manifest>

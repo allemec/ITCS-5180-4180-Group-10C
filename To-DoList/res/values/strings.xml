@@ -11,5 +11,10 @@
     <string name="Low">Low</string>
     <string name="Save">Save</string>
     <string name="title_activity_display">DisplayActivity</string>
+    <string name="taskInformation">Task Information</string>
+    <string name="name">Name:</string>
+    <string name="date">Date:</string>
+    <string name="time">Time:</string>
+    <string name="title_activity_edit_task">Edit Task</string>
 
 </resources>

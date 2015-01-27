@@ -28,13 +28,17 @@ public class MainActivity extends Activity {
 	public static final int DELETE_TASK_CODE = 4000;
 	public static final String CREATETASK = "CREATETASK";
 	public static final String TASKCLICK = "TASKCLICK";
+	public static final String FUNCTION = "FUNCTION";
+	public static final String DELETE = "DELETE";
+	public static final String EDIT = "EDIT";
+	public static final String EDIT_TASK = "EDIT_TASK";
 	public static final String TASK_ID = "TASK_ID";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		// displayData();
+		//setContentView(R.layout.activity_main);
+		 displayData();
 
 		findViewById(R.id.imageButton1).setOnClickListener(
 				new View.OnClickListener() {
@@ -127,10 +131,11 @@ public class MainActivity extends Activity {
 					public void onClick(View v) {
 
 						TaskList tk_onclick = (TaskList) ls.get(click_location);
-						Intent I = new Intent();
+						Intent I = new Intent(MainActivity.this,
+								DisplayActivity.class);
 						I.putExtra(MainActivity.TASKCLICK, tk_onclick);
 						I.putExtra(MainActivity.TASK_ID, click_location);
-						startActivityForResult(I,MainActivity.VIEW_TASK_CODE);
+						startActivityForResult(I, MainActivity.VIEW_TASK_CODE);
 
 					}
 				});
@@ -196,6 +201,38 @@ public class MainActivity extends Activity {
 				ls.add(tk);
 				// displayData();
 
+			}
+		} else if (requestCode == VIEW_TASK_CODE) {
+			if (resultCode == RESULT_OK) {
+				String function = data.getExtras().getString(FUNCTION);
+				int i = data.getExtras().getInt(TASK_ID);
+				if (function == MainActivity.DELETE) {
+					ls.remove(i);
+					displayData();
+				} else if (function == MainActivity.EDIT){
+					tk=(TaskList) ls.get(i);
+					Intent In = new Intent(MainActivity.this,
+							EditTask.class);
+					In.putExtra(MainActivity.EDIT, tk);
+					In.putExtra(MainActivity.TASK_ID, i);
+					startActivityForResult(In, MainActivity.EDIT_TASK_CODE);
+				}
+			}
+		} else if(requestCode == EDIT_TASK_CODE){
+			if(resultCode == RESULT_OK){
+				int i = data.getExtras().getInt(TASK_ID);
+				TaskList new_tk = data.getExtras().getParcelable(EDIT_TASK);
+				
+				ls.remove(i);
+				ls.add(i,new_tk);
+				Intent I = new Intent(MainActivity.this,
+						DisplayActivity.class);
+				I.putExtra(MainActivity.TASKCLICK, new_tk);
+				I.putExtra(MainActivity.TASK_ID, i);
+				startActivityForResult(I, MainActivity.VIEW_TASK_CODE);
+				
+				
+				
 			}
 		}
 	}
