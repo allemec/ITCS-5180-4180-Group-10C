@@ -36,7 +36,6 @@ public class CreateTask extends Activity {
 	String Dt;
 	String Tm;
 	String Priority;
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -171,9 +170,9 @@ public class CreateTask extends Activity {
 				Log.d("Priority", Priority + " ");
 
 				TaskList tk = new TaskList(Title, Dt, Tm, Priority);
-				Intent i = new Intent(CreateTask.this,MainActivity.class);
+				Intent i = new Intent(CreateTask.this, MainActivity.class);
 				i.putExtra(MainActivity.CREATETASK, tk);
-				setResult(RESULT_OK,i);
+				setResult(RESULT_OK, i);
 				finish();
 			}
 

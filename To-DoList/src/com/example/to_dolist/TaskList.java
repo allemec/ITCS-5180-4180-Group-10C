@@ -19,7 +19,7 @@ public class TaskList implements Parcelable {
 		this.task_name = task_name;
 		this.dt = dt;
 		this.tm = tm;
-		Priority = priority;
+		this.Priority = priority;
 	}
 
 	@Override
