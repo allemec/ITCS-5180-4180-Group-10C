@@ -156,13 +156,13 @@ public class EditTask extends Activity {
 					}
 				});
 		
-		if(tk.Priority == "High"){
+		if(tk.Priority.equals(MainActivity.High)){
 			RadioButton rb = (RadioButton) findViewById(R.id.radio0);
 			rb.setChecked(true);
-		} else if(tk.Priority == "Medium"){
+		} else if(tk.Priority.equals(MainActivity.Medium)){
 			RadioButton rb = (RadioButton) findViewById(R.id.radio1);
 			rb.setChecked(true);
-		} else if(tk.Priority == "Low"){
+		} else if(tk.Priority.equals(MainActivity.Low)){
 			RadioButton rb = (RadioButton) findViewById(R.id.radio2);
 			rb.setChecked(true);
 		}

@@ -34,6 +34,9 @@ public class MainActivity extends Activity {
 	public static final String EDIT = "EDIT";
 	public static final String EDIT_TASK = "EDIT_TASK";
 	public static final String TASK_ID = "TASK_ID";
+	public static final String High = "High";
+	public static final String Medium = "Medium";
+	public static final String Low = "Low";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +107,7 @@ public class MainActivity extends Activity {
 			Rlparams3.addRule(Rl.ALIGN_END, ib.getId());
 			Rlparams3.addRule(Rl.ALIGN_RIGHT, ib.getId());
 			Rlparams3.addRule(Rl.BELOW, ib.getId());
-			Rlparams3.addRule(Rl.ALIGN_PARENT_LEFT);
+			//Rlparams3.addRule(Rl.ALIGN_PARENT_RIGHT);
 			sv.setLayoutParams(Rlparams3);
 			Rl.addView(sv);
 
@@ -222,7 +225,6 @@ public class MainActivity extends Activity {
 				if (function.equals(MainActivity.DELETE)) {
 					Log.d("Delete Task",i + "Position");
 					ls.remove(i);
-					
 					displayData();
 				} else if (function.equals(MainActivity.EDIT)){
 					tk = (TaskList) ls.get(i);
@@ -239,6 +241,7 @@ public class MainActivity extends Activity {
 
 				ls.remove(i);
 				ls.add(i, new_tk);
+				displayData();
 				Intent I = new Intent(MainActivity.this, DisplayActivity.class);
 				I.putExtra(MainActivity.TASKCLICK, new_tk);
 				I.putExtra(MainActivity.TASK_ID, i);
