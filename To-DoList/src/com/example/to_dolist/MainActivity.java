@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import android.R.integer;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -59,7 +60,7 @@ public class MainActivity extends Activity {
 
 			TextView tv = new TextView(this);
 			RelativeLayout.LayoutParams Rlparams1 = new RelativeLayout.LayoutParams(
-					300, 30);
+					300, 150);
 			Rlparams1.addRule(Rl.ALIGN_PARENT_LEFT);
 			Rlparams1.addRule(Rl.ALIGN_PARENT_TOP);
 			Rlparams1.setMargins(15, LayoutParams.MATCH_PARENT,
@@ -67,7 +68,8 @@ public class MainActivity extends Activity {
 			tv.setLayoutParams(Rlparams1);
 			tv.setId(1);
 			tv.setTextAppearance(this, android.R.style.TextAppearance_Large);
-			tv.setText(ls.size() + "Tasks");
+			tv.setTypeface(Typeface.DEFAULT_BOLD);
+			tv.setText(ls.size() + " Tasks");
 			Rl.addView(tv);
 
 			RelativeLayout.LayoutParams Rlparams2 = new RelativeLayout.LayoutParams(
@@ -125,7 +127,7 @@ public class MainActivity extends Activity {
 				LinearLayout LL1 = new LinearLayout(this);
 				LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(
 						300, 70);
-				params1.setMargins(LayoutParams.MATCH_PARENT, 10,
+				params1.setMargins(15, 10,
 						LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 				LL1.setOrientation(LinearLayout.VERTICAL);
 				LL1.setTag(tag_tracker);
@@ -154,11 +156,12 @@ public class MainActivity extends Activity {
 						LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 				ll2.addRule(RelativeLayout.BELOW, id_tracker - 1);
 				tv_title.setTextAppearance(this,
-						android.R.style.TextAppearance_Medium);
-				LL1.addView(tv_title);
+						android.R.style.TextAppearance_Large);
+				tv_title.setTypeface(Typeface.DEFAULT_BOLD);
 				tv_title.setId(id_tracker);
 				id_tracker++;
 				tv_title.setText(tk.task_name);
+				LL1.addView(tv_title);
 
 				TextView tv_date = new TextView(this);
 				RelativeLayout.LayoutParams ll3 = new RelativeLayout.LayoutParams(
@@ -183,7 +186,7 @@ public class MainActivity extends Activity {
 						android.R.style.TextAppearance_Small);
 				tv_title.setId(id_tracker);
 				id_tracker++;
-				tv_date.setText(tk.dt);
+				tv_time.setText(tk.tm);
 				LL1.addView(tv_time);
 
 			

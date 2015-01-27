@@ -45,6 +45,13 @@ public class EditTask extends Activity {
 		et1 = (EditText) findViewById(R.id.editText2);
 		et1.setKeyListener(null);
 		et1.setText(tk.dt);
+		
+		Title = tk.task_name;
+		Dt = tk.dt;
+		Tm = tk.tm;
+		Priority = tk.Priority;
+		
+		
 
 		findViewById(R.id.editText2).setOnClickListener(
 				new View.OnClickListener() {
